@@ -1,6 +1,6 @@
-from Games import get_games
-from Util import get_user_input_and_validate
-from ConfigHandler import read_config
+from Games.Games import get_games
+from Utils.ConfigHandler import read_config
+from Utils.Utils import get_user_input_and_validate
 
 
 def welcome(name):
@@ -24,7 +24,7 @@ def load_game():
                                               "Game input should be a number, please try again - ",
                                               "Game not found, please try again - ",
                                               int,
-                                              range(1, len(get_games()) + 1))
+                                              range(1, len(Games.get_games()) + 1))
 
     difficulty = get_user_input_and_validate(f"Please choose game difficulty from 1 to {max_difficulty}: ",
                                              "Difficulty should be a number, please try again - ",
@@ -33,10 +33,3 @@ def load_game():
                                              range(1, max_difficulty + 1))
 
     get_games().get(chosen_game)(difficulty)
-
-
-def check_input(user_input, expected_input):
-    if user_input in expected_input:
-        return True
-
-    return False

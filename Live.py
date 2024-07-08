@@ -1,6 +1,6 @@
-from Games.Games import get_games
+from Games import get_games
 from Utils.ConfigHandler import read_config
-from Utils.Utils import get_user_input_and_validate
+from Utils import get_user_input_and_validate
 
 
 def welcome(name):
@@ -12,7 +12,6 @@ def load_game():
     config_values = read_config()
 
     max_difficulty = config_values.get('max_difficulty')
-    is_valid_difficulty = False
 
     chosen_game = get_user_input_and_validate("Please choose a game to play: \n"
                                               "1. Memory Game - a sequence of numbers will appear for 1 second and "
@@ -24,7 +23,7 @@ def load_game():
                                               "Game input should be a number, please try again - ",
                                               "Game not found, please try again - ",
                                               int,
-                                              range(1, len(Games.get_games()) + 1))
+                                              range(1, len(get_games()) + 1))
 
     difficulty = get_user_input_and_validate(f"Please choose game difficulty from 1 to {max_difficulty}: ",
                                              "Difficulty should be a number, please try again - ",

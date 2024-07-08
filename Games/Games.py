@@ -1,6 +1,6 @@
-from GuessGame import play as playGuessGame
-from MemoryGame import play as playMemoryGame
-from CurrencyRouletteGame import play as playCurrencyRouletteGame
+from .GuessGame import play as playGuessGame
+from .MemoryGame import play as playMemoryGame
+from .CurrencyRouletteGame import play as playCurrencyRouletteGame
 
 
 def get_games():

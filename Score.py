@@ -1,6 +1,6 @@
-from Utils.Utils import read_file
-from Utils.Utils import write_to_file
-from Utils.Utils import SCORES_FILE_NAME
+from Utils import read_file
+from Utils import write_to_file
+from Utils import SCORES_FILE_NAME
 
 
 def add_score(difficulty):

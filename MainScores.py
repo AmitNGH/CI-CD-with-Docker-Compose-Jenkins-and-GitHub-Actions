@@ -14,3 +14,5 @@ def score_server():
                      '   G</body>'
                      '</html>')
     return body_template
+
+app.run(debug=True)

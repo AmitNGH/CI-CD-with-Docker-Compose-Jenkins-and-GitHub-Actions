@@ -1,5 +1,5 @@
 from random import randint
-from Utils.Utils import get_user_input_and_validate
+from Utils import get_user_input_and_validate
 
 
 def generate_number(difficulty):

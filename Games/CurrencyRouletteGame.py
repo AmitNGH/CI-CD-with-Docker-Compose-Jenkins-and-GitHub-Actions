@@ -1,5 +1,5 @@
 from requests import get
-from Utils.Utils import get_user_input_and_validate
+from Utils import get_user_input_and_validate
 from random import randint
 
 api_url = "https://v6.exchangerate-api.com/v6/45f3830387d754dcb21676b3/latest/USD"

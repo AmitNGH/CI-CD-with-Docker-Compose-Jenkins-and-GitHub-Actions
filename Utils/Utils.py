@@ -35,7 +35,7 @@ def get_user_input_and_validate(initial_message,
 
 def read_file(file_location):
     with open(file_location, "r") as file:
-            file_content = file.readlines()
+        file_content = file.readlines()
 
     return file_content
 

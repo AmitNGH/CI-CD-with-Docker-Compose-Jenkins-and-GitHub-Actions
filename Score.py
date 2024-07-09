@@ -4,13 +4,13 @@ from Utils import SCORES_FILE_NAME
 
 
 def add_score(difficulty):
-    current_score = 0
     points_of_winning = (difficulty * 3) + 5
+    current_score = get_score()
+    write_to_file(SCORES_FILE_NAME, current_score + points_of_winning)
 
+
+def get_score():
     try:
-        current_score = read_file(SCORES_FILE_NAME)
+        return read_file(SCORES_FILE_NAME)
     except IOError:
-        pass
-    finally:
-        write_to_file(SCORES_FILE_NAME, current_score + points_of_winning)
-
+        return 0

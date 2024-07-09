@@ -1,3 +1,4 @@
+from Score import add_score
 from Games import get_games
 from Utils.ConfigHandler import read_config
 from Utils import get_user_input_and_validate
@@ -31,4 +32,5 @@ def load_game():
                                              int,
                                              range(1, max_difficulty + 1))
 
-    get_games().get(chosen_game)(difficulty)
+    if get_games().get(chosen_game)(difficulty):
+        add_score(difficulty)

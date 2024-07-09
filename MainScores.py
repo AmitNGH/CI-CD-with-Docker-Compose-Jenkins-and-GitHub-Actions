@@ -28,3 +28,7 @@ def score_server():
                      "</html>")
 
     return body_template
+
+
+if __name__ == "__main__":
+    run_score_main()

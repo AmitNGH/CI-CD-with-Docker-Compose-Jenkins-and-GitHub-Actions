@@ -35,11 +35,11 @@ def get_user_input_and_validate(initial_message,
 
 def read_file(file_location):
     with open(file_location, "r") as file:
-        file_content = file.readlines()
+        file_content = file.readline()
 
     return file_content
 
 
 def write_to_file(file_location, content):
     with open(file_location, "w") as file:
-        file.write(content)
+        file.write(str(content))

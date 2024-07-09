@@ -11,6 +11,6 @@ def add_score(difficulty):
 
 def get_score():
     try:
-        return read_file(SCORES_FILE_NAME)
-    except IOError:
+        return int(read_file(SCORES_FILE_NAME))
+    except (IOError, ValueError):
         return 0

@@ -1,15 +1,20 @@
-import MainScores
-import Live
-import multiprocessing
+import Live as Live
+import Utils.Utils as Utils
 from time import sleep
-
-
-score_main_thread = multiprocessing.Process(target=MainScores.run_score_main)
-score_main_thread.start()
 
 sleep(1)
 
 print(Live.welcome("Amit"))
-Live.load_game()
 
-score_main_thread.terminate()
+playing = True
+
+while playing:
+    Live.load_game()
+    continue_playing = difficulty = Utils.get_user_input_and_validate(f"Do you want to play another game? enter y/n ",
+                                                                      "Invalid input, please enter y/n",
+                                                                      "Invalid input, please enter y/n",
+                                                                      str,
+                                                                      ["y", "n"])
+
+    if continue_playing == "n":
+        playing = False

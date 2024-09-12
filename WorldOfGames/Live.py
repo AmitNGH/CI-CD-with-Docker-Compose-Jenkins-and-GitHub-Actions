@@ -1,7 +1,7 @@
 from Score import add_score
-import WorldOfGames.Games.Games as Games
-import WorldOfGames.Utils.ConfigHandler as ConfigManager
-import WorldOfGames.Utils.Utils as Utils
+import Games.Games as Games
+import Utils.ConfigHandler as ConfigManager
+import Utils.Utils as Utils
 
 
 def welcome(name):

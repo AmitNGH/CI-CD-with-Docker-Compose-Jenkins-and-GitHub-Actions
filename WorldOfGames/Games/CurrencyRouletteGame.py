@@ -1,5 +1,5 @@
 from requests import get
-import WorldOfGames.Utils.Utils as Utils
+import Utils.Utils as Utils
 from random import randint
 
 api_url = "https://v6.exchangerate-api.com/v6/45f3830387d754dcb21676b3/latest/USD"

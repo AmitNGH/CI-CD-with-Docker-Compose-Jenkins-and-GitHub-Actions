@@ -1,6 +1,6 @@
 from random import randint
 from time import sleep
-import WorldOfGames.Utils.Utils as Utils
+import Utils.Utils as Utils
 
 
 def generate_sequence(difficulty):

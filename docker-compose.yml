@@ -1,0 +1,29 @@
+version: '3'
+services:
+  app:
+    build: ./
+    command: python3 MainGame.py
+    stdin_open: true
+    tty: true
+#    environment:
+#      MYSQL_DATABASE: 'db'
+#      MYSQL_USER: 'user'
+#      MYSQL_PASSWORD: 'user'
+#      MYSQL_ROOT_PASSWORD: 'root'
+#    ports:
+#      - '8777:5000'
+#    volumes:
+#      - ./db:/var/lib/mysql
+#      - ./sql:/docker-entrypoint-initdb.d
+
+  scores:
+    build: ./
+    command: python3 MainScores.py
+#    stdin_open: true
+#    tty: true
+
+    ports:
+      - '8777:5000'
+    #    volumes:
+    #      - ./db:/var/lib/mysql
+    #      - ./sql:/docker-entrypoint-initdb.d

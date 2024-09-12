@@ -1,12 +1,11 @@
 from requests import get
-from Utils import get_user_input_and_validate
+import WorldOfGames.Utils.Utils as Utils
 from random import randint
 
 api_url = "https://v6.exchangerate-api.com/v6/45f3830387d754dcb21676b3/latest/USD"
 
 
 def get_money_interval(difficulty, generated_num):
-
     exchange_rate = get(api_url).json()['conversion_rates']['ILS']
 
     total_value = exchange_rate * generated_num
@@ -14,10 +13,10 @@ def get_money_interval(difficulty, generated_num):
 
 
 def get_guess_from_user():
-    return get_user_input_and_validate(f"Enter your guess of the current exchange rate betweeמ USD to ILS ",
-                                       "Guess should be a number, please try again - ",
-                                       "",
-                                       float)
+    return Utils.get_user_input_and_validate(f"Enter your guess of the current exchange rate betweeמ USD to ILS ",
+                                             "Guess should be a number, please try again - ",
+                                             "",
+                                             float)
 
 
 def play(difficulty):

@@ -1,6 +1,6 @@
 from random import randint
 from time import sleep
-from Utils import get_user_input_and_validate
+import WorldOfGames.Utils.Utils as Utils
 
 
 def generate_sequence(difficulty):
@@ -12,16 +12,15 @@ def generate_sequence(difficulty):
 
 
 def get_guess_from_user(difficulty):
-
     print(f"Enter the {difficulty} numbers you remember, Press the Enter key between each number")
 
     user_guess = []
     for i in range(difficulty):
-        user_guess.append(get_user_input_and_validate("",
-                                                      "Guess should be a number, please try again - ",
-                                                      "Guess not in range, please try again - ",
-                                                      int,
-                                                      range(1, 102)))
+        user_guess.append(Utils.get_user_input_and_validate("",
+                                                            "Guess should be a number, please try again - ",
+                                                            "Guess not in range, please try again - ",
+                                                            int,
+                                                            range(1, 102)))
 
     return user_guess
 

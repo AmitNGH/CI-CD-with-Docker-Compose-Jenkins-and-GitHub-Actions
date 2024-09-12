@@ -1,5 +1,5 @@
 from Score import get_score
-from flask import Flask
+from flask import Flask, request
 from Utils import BAD_RETURN_CODE
 
 app = Flask(__name__)
@@ -28,6 +28,12 @@ def score_server():
                      "</html>")
 
     return body_template
+
+
+def stop_server():
+    shutdown_server = request.environ.get('werkzeug.server.shutdown')
+    shutdown_server()
+    # kill(getpid(), CTRL_C_EVENT)
 
 
 if __name__ == "__main__":

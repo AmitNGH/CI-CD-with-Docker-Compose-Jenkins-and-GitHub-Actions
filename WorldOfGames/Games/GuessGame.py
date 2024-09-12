@@ -1,5 +1,5 @@
 from random import randint
-from Utils import get_user_input_and_validate
+import WorldOfGames.Utils.Utils as Utils
 
 
 def generate_number(difficulty):
@@ -7,11 +7,11 @@ def generate_number(difficulty):
 
 
 def get_guess_from_user(difficulty):
-    return get_user_input_and_validate(f"Please enter a number between 1 to {difficulty} - ",
-                                       "Guess should be a number, please try again - ",
-                                       "Guess not in range, please try again - ",
-                                       int,
-                                       range(1, difficulty + 1))
+    return Utils.get_user_input_and_validate(f"Please enter a number between 1 to {difficulty} - ",
+                                             "Guess should be a number, please try again - ",
+                                             "Guess not in range, please try again - ",
+                                             int,
+                                             range(1, difficulty + 1))
 
 
 def compare_results(secret_number, user_guess):

@@ -1,6 +1,6 @@
 from os import system
 
-SCORES_FILE_NAME = "Scores.txt"
+SCORES_FILE_NAME = "Score/Scores.txt"
 BAD_RETURN_CODE = 2001
 
 

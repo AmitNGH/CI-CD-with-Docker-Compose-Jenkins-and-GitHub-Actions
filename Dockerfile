@@ -6,8 +6,6 @@ COPY ["./WorldOfGames/", "./"]
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-#RUN apk add --no-cache sh
-
 ENV PYTHONPATH /world-of-games
 
 #CMD ["python", "MainGame.py"]

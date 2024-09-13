@@ -1,8 +1,8 @@
-import selenium
+from selenium import webdriver
 
 
 def test_scores_service(url):
-    driver = selenium.webdriver.Chrome()
+    driver = webdriver.Chrome()
     driver.get(url)
     score = int(driver.find_element(by="id", value="score").text)
 
@@ -10,7 +10,10 @@ def test_scores_service(url):
 
 
 def main_function():
-    if test_scores_service("localhost:5000"):
+    if test_scores_service("http://localhost:5000"):
         exit(0)
 
     exit(-1)
+
+
+main_function()

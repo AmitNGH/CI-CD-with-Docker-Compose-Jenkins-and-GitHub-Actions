@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 
 def run_score_main():
-    app.run(debug=True, use_reloader=False)
+    app.run(host="0.0.0.0", port=5000, use_reloader=False)
 
 
 @app.route('/')
@@ -28,12 +28,6 @@ def score_server():
                      "</html>")
 
     return body_template
-
-
-def stop_server():
-    shutdown_server = request.environ.get('werkzeug.server.shutdown')
-    shutdown_server()
-    # kill(getpid(), CTRL_C_EVENT)
 
 
 if __name__ == "__main__":

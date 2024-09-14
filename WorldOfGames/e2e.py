@@ -10,7 +10,7 @@ def test_scores_service(url):
 
 
 def main_function():
-    if test_scores_service("http://localhost:5000"):
+    if test_scores_service("http://localhost:8777"):
         exit(0)
 
     exit(-1)

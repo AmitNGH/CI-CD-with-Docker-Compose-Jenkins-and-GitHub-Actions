@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "amitnd/worldofgames-score:latest"
+        DOCKER_IMAGE = "amitnd/worldofgames-score"
         CONTAINER_NAME = "worldofgames-score"
         PORT = 8777
         DUMMY_FILE = "Scores.txt"
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 // Build the Docker image
                 script {
-                    docker compose build
+                    sh 'docker compose build'
                 }
             }
         }
@@ -41,22 +41,23 @@ pipeline {
             }
         }
 
-//         stage('Test') {
-//             steps {
-//                 script {
-//                     // Run e2e.py using Selenium to test the application
-//                     sh 'python3 e2e.py'
-//
-//                     // Verify if tests passed or fail the pipeline
-//                     script {
-//                         def result = sh(script: 'python3 e2e.py', returnStatus: true)
-//                         if (result != 0) {
-//                             error "e2e tests failed!"
-//                         }
-//                     }
-//                 }
-//             }
-//         }
+        stage('Test') {
+            steps {
+                script {
+                    // Run e2e.py using Selenium to test the application
+                    sh 'pip install -r ./WorldOfGames/requirements.txt'
+                    sh 'python3 ./WorldOfGames/e2e.py'
+
+                    // Verify if tests passed or fail the pipeline
+                    script {
+                        def result = sh(script: 'python3 e2e.py', returnStatus: true)
+                        if (result != 0) {
+                            error "e2e tests failed!"
+                        }
+                    }
+                }
+            }
+        }
 //
 //         stage('Finalize') {
 //             steps {
@@ -80,21 +81,99 @@ pipeline {
 //         }
     }
 //
-//     post {
-//         success {
-//             echo 'Pipeline completed successfully!'
-//         }
-//
-//         failure {
-//             echo 'Pipeline failed!'
-//         }
-//
-//         always {
-//             // Ensure container is terminated if still running
-//             script {
-//                 sh "docker stop ${CONTAINER_NAME} || true"
-//                 sh "docker rm ${CONTAINER_NAME} || true"
-//             }
-//         }
-//     }
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+
+        failure {
+            echo 'Pipeline failed!'
+        }
+
+        always {
+            // Ensure container is terminated if still running
+            script {
+                sh "docker stop ${CONTAINER_NAME} || true"
+                sh "docker rm ${CONTAINER_NAME} || true"
+            }
+        }
+    }
+}
+
+
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = "amitnd/worldofgames-score"
+        CONTAINER_NAME = "worldofgames-score"
+        PORT = 8777
+        DUMMY_FILE = "Scores.txt"
+        DOCKER_HUB_CREDENTIALS = 'dockerhub-credentials-id'  // Jenkins credentials ID for DockerHub
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the source code from the repository
+                git branch: 'level-4', url: 'https://github.com/AmitNGH/WorldOfGames.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build the Docker image
+                script {
+                    sh 'docker compose build'
+                }
+            }
+        }
+
+        stage('Run') {
+            steps {
+                script {
+
+                    sh 'docker exec worldofgames-score-1 bash -c "echo '5' > Score.txt"'
+                    sh 'docker compose up -d score'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    // Run e2e.py using Selenium to test the application
+                    sh 'python3 -m venv ./venv'
+                    sh 'ls -l ./venv/bin'
+                    sh './venv/bin/pip install -r ./WorldOfGames/requirements.txt'
+                    sh './venv/bin/python3 ./WorldOfGames/e2e.py'
+
+                    // Verify if tests passed or fail the pipeline
+                    // script {
+                    //     def result = sh(script: 'python3 e2e.py', returnStatus: true)
+                    //     if (result != 0) {
+                    //         error "e2e tests failed!"
+                    //     }
+                    // }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+
+        failure {
+            echo 'Pipeline failed!'
+        }
+
+        always {
+            // Ensure container is terminated if still running
+            script {
+                sh "docker stop ${CONTAINER_NAME} || true"
+                sh "docker rm ${CONTAINER_NAME} || true"
+            }
+        }
+    }
 }

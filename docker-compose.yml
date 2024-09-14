@@ -2,7 +2,7 @@ services:
     app:
         build: ./
         image: amitnd/worldofgames-app:latest
-        command: python3 MainGame.py
+        command: python3 ./MainGame.py
         stdin_open: true
         tty: true
 #        volumes:
@@ -11,6 +11,6 @@ services:
     score:
         build: ./
         image: amitnd/worldofgames-score:latest
-        command: python3 MainScores.py
+        command: python3 ./MainScores.py
         ports:
-          - '8777:5000'
+            - '8777:5000'

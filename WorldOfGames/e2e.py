@@ -2,7 +2,9 @@ from selenium import webdriver
 
 
 def test_scores_service(url):
-    driver = webdriver.Chrome()
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    driver = webdriver.Chrome(options=options)
     driver.get(url)
     score = int(driver.find_element(by="id", value="score").text)
 

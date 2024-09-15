@@ -12,7 +12,7 @@ def test_scores_service(url):
 
 
 def main_function(host, port):
-    if test_scores_service(f"http://${host}:port"):
+    if test_scores_service("http://{}:{}".format(host, port)):
         exit(0)
 
     exit(-1)

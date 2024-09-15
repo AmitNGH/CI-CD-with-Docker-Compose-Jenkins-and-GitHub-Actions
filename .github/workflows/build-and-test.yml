@@ -49,7 +49,8 @@ jobs:
         docker exec worldofgames-score-1 mkdir Score
         docker exec worldofgames-score-1 /bin/sh -c "echo '5' > Score/Score.txt"
         source ./venv/bin/activate
-        python ./WorldOfGames/e2e.py "${{ env.IP_ADDRESS }}" 5000
+        python ./WorldOfGames/e2e.py "localhost" 8777
+      # python ./WorldOfGames/e2e.py "${{ env.IP_ADDRESS }}" 5000
 
     - name: Output Docker logs
       run: |

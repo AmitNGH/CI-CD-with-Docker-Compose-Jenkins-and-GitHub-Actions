@@ -49,7 +49,7 @@ jobs:
     - name: Run Python tests
       run: |
         . ./venv/bin/activate
-        python ./WorldOfGames/e2e.py "${{ env.IP_ADDRESS }}" 5000
+        python ./WorldOfGames/e2e.py "localhost" 8777
       continue-on-error: true
 
     - name: Output Docker logs

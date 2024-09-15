@@ -3,6 +3,7 @@ from selenium.common.exceptions import WebDriverException
 import sys
 import traceback
 
+
 def test_scores_service(url):
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
@@ -13,9 +14,20 @@ def test_scores_service(url):
     try:
         driver = webdriver.Chrome(options=options)
         driver.get(url)
+
+        # Debugging: Print page source
+        print("Page source:", driver.page_source)
+
+        # Find the element and retrieve its text
         score_element = driver.find_element(by="id", value="score")
-        score = int(score_element.text)
+        score_text = score_element.text
+        print(f"Score element text: '{score_text}'")
+
+        # Convert score to integer and validate
+        score = int(score_text)
         driver.quit()
+
+        print(f"Score: {score}")
         return 1 < score < 1000
     except WebDriverException as e:
         print(f"WebDriverException: {e}")

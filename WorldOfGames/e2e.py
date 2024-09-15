@@ -1,5 +1,3 @@
-import traceback
-
 from selenium import webdriver
 
 
@@ -14,10 +12,7 @@ def test_scores_service(url):
 
 
 def main_function(host, port):
-    try:
-        if test_scores_service(f"http://{host}:{port}"):
-            exit(0)
-        exit(-1)
-    except Exception as e:
-        print(f"Error occurred: {e}")
-        traceback.print_exc()
+    if test_scores_service(f"http://{host}:{port}"):
+        exit(0)
+
+    exit(-1)

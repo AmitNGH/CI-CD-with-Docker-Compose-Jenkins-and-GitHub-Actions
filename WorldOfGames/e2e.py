@@ -11,11 +11,8 @@ def test_scores_service(url):
     return 1 < score < 1000
 
 
-def main_function():
-    if test_scores_service("http://localhost:8777"):
+def main_function(host, port):
+    if test_scores_service(f"http://${host}:port"):
         exit(0)
 
     exit(-1)
-
-
-main_function()

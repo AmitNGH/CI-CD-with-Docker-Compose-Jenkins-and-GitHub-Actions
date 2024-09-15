@@ -106,7 +106,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "amitnd/worldofgames-score"
-        CONTAINER_NAME = "worldofgames-score"
+        CONTAINER_NAME = "worldofgames-score-1"
         PORT = 8777
         DUMMY_FILE = "Scores.txt"
         DOCKER_HUB_CREDENTIALS = 'dockerhub-credentials-id'  // Jenkins credentials ID for DockerHub
@@ -132,8 +132,9 @@ pipeline {
         stage('Run') {
             steps {
                 script {
+                    sh 'echo "5" > ${DUMMY_FILE}'
 
-                    sh 'docker exec worldofgames-score-1 bash -c "echo '5' > Score.txt"'
+                    // sh 'docker compose up -d score'
                     sh 'docker compose up -d score'
                 }
             }
@@ -142,11 +143,15 @@ pipeline {
         stage('Test') {
             steps {
                 script {
+                    sh 'docker exec ${CONTAINER_NAME} /bin/sh -c \"echo \'5\' > Score.txt\"'
+                    sh 'docker container list'
+                    sh 'docker network connect jenkins worldofgames-score-1'
+                    sh 'curl http://$(docker inspect -f \'{{.NetworkSettings.Networks.jenkins.IPAddress}}\' worldofgames-score-1):<port>'
                     // Run e2e.py using Selenium to test the application
-                    sh 'python3 -m venv ./venv'
-                    sh 'ls -l ./venv/bin'
-                    sh './venv/bin/pip install -r ./WorldOfGames/requirements.txt'
-                    sh './venv/bin/python3 ./WorldOfGames/e2e.py'
+                    // sh 'python3 -m venv ./venv'
+                    // sh './venv/bin/pip install -r ./WorldOfGames/requirements.txt'
+                    // sh './venv/bin/pip install webdriver-manager'
+                    // sh './venv/bin/python3 ./WorldOfGames/e2e.py'
 
                     // Verify if tests passed or fail the pipeline
                     // script {

@@ -4,6 +4,9 @@ import sys
 def test_scores_service(url):
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
     driver = webdriver.Chrome(options=options)
     driver.get(url)
     score = int(driver.find_element(by="id", value="score").text)

@@ -3,7 +3,7 @@ name: World Of Games Pipeline
 on:
   workflow_dispatch:
   push:
-    branches: [ "main", "level-4" ]
+    branches: [ "main" ]
 
 jobs:
   build-and-test:

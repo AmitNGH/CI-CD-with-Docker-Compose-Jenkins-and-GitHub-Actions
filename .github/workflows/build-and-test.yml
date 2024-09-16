@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         ref: level-4
 
@@ -32,17 +32,8 @@ jobs:
         python3 -m venv ./venv
         source ./venv/bin/activate
         pip install -r ./WorldOfGames/requirements.txt
-        pip install webdriver-manager
-
-    # - name: Print docker machines
-    #   run: |
-    #     docker container list
         
-        
-    # - name: Get Docker container IP address
-    #   run: |
-    #     ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' worldofgames-score-1)
-    #     echo "IP_ADDRESS=${ip}" >> $GITHUB_ENV
+    # # pip install webdriver-manager
 
     - name: Run Python tests
       run: |
@@ -52,16 +43,7 @@ jobs:
         python ./WorldOfGames/e2e.py "localhost" 8777
       # python ./WorldOfGames/e2e.py "${{ env.IP_ADDRESS }}" 5000
 
-    - name: Output Docker logs
-      run: |
-        docker logs worldofgames-score-1
-
     - name: Stop and remove Docker container
       run: |
         docker stop worldofgames-score-1 || true
         docker rm worldofgames-score-1 || true
-
-    - name: Verify test result
-      if: failure()
-      run: |
-        echo "Python script failed"
